@@ -33,17 +33,19 @@
             this.txtCSVFilePath = new System.Windows.Forms.TextBox();
             this.btnSelectCSVFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnUseTestCSV = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnUseTestCSV);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtCSVFilePath);
             this.groupBox1.Controls.Add(this.btnSelectCSVFile);
             this.groupBox1.Location = new System.Drawing.Point(120, 85);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(515, 134);
+            this.groupBox1.Size = new System.Drawing.Size(515, 209);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "File CSV Picker";
@@ -84,6 +86,16 @@
             this.label1.TabIndex = 3;
             this.label1.Text = " .NET library assembly (DLL) for a system that handles the employee hierarchy";
             // 
+            // btnUseTestCSV
+            // 
+            this.btnUseTestCSV.Location = new System.Drawing.Point(164, 137);
+            this.btnUseTestCSV.Name = "btnUseTestCSV";
+            this.btnUseTestCSV.Size = new System.Drawing.Size(154, 39);
+            this.btnUseTestCSV.TabIndex = 4;
+            this.btnUseTestCSV.Text = "Use Test CSV";
+            this.btnUseTestCSV.UseVisualStyleBackColor = true;
+            this.btnUseTestCSV.Click += new System.EventHandler(this.btnUseTestCSV_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -108,5 +120,6 @@
         private System.Windows.Forms.TextBox txtCSVFilePath;
         private System.Windows.Forms.Button btnSelectCSVFile;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnUseTestCSV;
     }
 }

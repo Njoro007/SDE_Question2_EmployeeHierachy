@@ -13,4 +13,10 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Employee.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

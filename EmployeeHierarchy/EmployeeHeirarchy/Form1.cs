@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,45 +16,76 @@ namespace EmployeeHeirarchy
 
         private void btnSelectCSVFile_Click(object sender, System.EventArgs e)
         {
-            string fileContent = string.Empty;
-            var filePath = string.Empty;
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            try
             {
-                //Verify Selected File is a CSV File Only
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "csv files (*.csv)|*.csv";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
+                string fileContent = string.Empty;
+                var filePath = string.Empty;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
+                    //Verify Selected File is a CSV File Only
+                    openFileDialog.InitialDirectory = "c:\\";
+                    openFileDialog.Filter = "csv files (*.csv)|*.csv";
+                    openFileDialog.FilterIndex = 2;
+                    openFileDialog.RestoreDirectory = true;
 
-                    //Read the contents of the file into a stream
-                    var fileStream = openFileDialog.OpenFile();
-
-                    using (StreamReader reader = new StreamReader(fileStream))
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        fileContent = reader.ReadToEnd();
+                        //Get the path of specified file
+                        filePath = openFileDialog.FileName;
+
+                        //Read the contents of the file into a stream
+                        var fileStream = openFileDialog.OpenFile();
+
+                        using (StreamReader reader = new StreamReader(fileStream))
+                        {
+                            fileContent = reader.ReadToEnd();
+                        }
                     }
                 }
+
+                Employee.Employee employee;
+                employee = new Employee.Employee(fileContent);
+
+                MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-            Employee.Employee employee;
-            employee = new Employee.Employee(fileContent);
+        private void btnUseTestCSV_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                string fileContent = string.Empty;
+                var filePath = string.Empty;
 
-            MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
+                //Get the path of specified file
+                filePath = Path.Combine(Directory.GetCurrentDirectory(), @"Employee.csv");
 
+                //Read the contents of the file into a stream
+                var fileStream = File.OpenRead(filePath);
 
-            //List<Employee.Employee> values = File.ReadAllLines(filePath).Skip(1)
-            //                               .Select(v => Employee.Employee(v))
-            //                               .ToList();
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    fileContent = reader.ReadToEnd();
+                }
 
+                Employee.Employee employee;
+                employee = new Employee.Employee(fileContent);
 
-
-            
+                MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
+            }
+            catch(FormatException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
